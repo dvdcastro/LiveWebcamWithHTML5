@@ -6,12 +6,21 @@ function hasGetUserMedia() {
             navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
 
+function applyRefreshRate() {
+    refreshRate = document.getElementById("refrehRate").value;
+    document.getElementById("refreshRateIndicator").innerHTML = refreshRate;
+}
+
 var video = document.getElementById('sourcevid');
 
 navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.webkitGetUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
+
+var refreshRate = 0;
+
+applyRefreshRate();
 
 if (hasGetUserMedia()) {
     navigator.getMedia(
@@ -72,7 +81,7 @@ if (hasGetUserMedia()) {
         
         send(stringData);
         
-        setTimeout(function() { draw(v, bc, w, h) });
+        setTimeout(function() { draw(v, bc, w, h) }, refreshRate);
     }
     
 } else {
